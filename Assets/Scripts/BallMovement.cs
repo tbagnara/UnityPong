@@ -3,18 +3,23 @@ using UnityEngine;
 
 public class BallMovement : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public float forceX = 10f;
-    public float forceY = 10f;
+    [SerializeField] private Vector2 velocity = new Vector2(10f,10f);
     private Rigidbody2D rb2d; 
     
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        rb2d.linearVelocity = new Vector2(forceX, forceY);
+        rb2d.linearVelocity = velocity;
+        
     }
 
-    // Update is called once per frame
+    public Vector2 Velocity
+    {
+        get {return velocity;}
+        set {velocity = new Vector2();}
+    }
+
+    
     void Update()
     {
         
@@ -35,7 +40,8 @@ public class BallMovement : MonoBehaviour
             Debug.Log("Wall");
         }
 
-
     }
+
+
 
 }

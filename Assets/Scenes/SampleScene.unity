@@ -736,9 +736,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1051309667}
   - component: {fileID: 1051309671}
-  - component: {fileID: 1051309670}
-  - component: {fileID: 1051309672}
   - component: {fileID: 1051309673}
+  - component: {fileID: 1051309674}
+  - component: {fileID: 1051309675}
   m_Layer: 0
   m_Name: LeftPaddle
   m_TagString: Player
@@ -761,22 +761,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 764960430}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1051309670
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1051309666}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d573318abc66a9a459eac5ddccf5901d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PaddleMovement
-  moveUp: 273
-  moveDown: 274
-  speed: 5
-  boundY: 4
 --- !u!212 &1051309671
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -835,33 +819,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &1051309672
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1051309666}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!61 &1051309673
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -908,6 +865,45 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1051309674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1051309666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0115fe92f74c33a49a595e039eb582be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player1Paddle
+--- !u!50 &1051309675
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1051309666}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1068700435
 GameObject:
   m_ObjectHideFlags: 0
@@ -1150,8 +1146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67445dc068282154a9938ef648146dd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  forceX: 5
-  forceY: 5
+  velocity: {x: 5, y: 5}
 --- !u!50 &1108601233
 Rigidbody2D:
   serializedVersion: 5
@@ -1362,9 +1357,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1290638882}
   - component: {fileID: 1290638884}
-  - component: {fileID: 1290638883}
   - component: {fileID: 1290638885}
   - component: {fileID: 1290638886}
+  - component: {fileID: 1290638887}
   m_Layer: 0
   m_Name: RightPaddle
   m_TagString: Untagged
@@ -1387,22 +1382,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 764960430}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1290638883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1290638881}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d573318abc66a9a459eac5ddccf5901d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PaddleMovement
-  moveUp: 273
-  moveDown: 274
-  speed: 5
-  boundY: 4
 --- !u!212 &1290638884
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1534,6 +1513,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1290638887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1290638881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2ee5df9950e7ac4e8666e488db73df7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player2Paddle
 --- !u!1 &1822849399
 GameObject:
   m_ObjectHideFlags: 0
@@ -1705,7 +1696,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 189}
+  m_AnchoredPosition: {x: 0, y: 208.5}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2066273054
