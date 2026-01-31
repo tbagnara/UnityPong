@@ -1,15 +1,19 @@
 using UnityEngine;
 
-public class PaddleController : MonoBehaviour
+public abstract class PaddleController : MonoBehaviour
 {
     protected float speed = 5f;
-    protected float boundY = 5f;
+    protected float boundY = 4f;
+
+    protected int inWall = 0;
 
     private Rigidbody2D rb2d;
+    
 
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        
     }
 
     
@@ -21,7 +25,7 @@ public class PaddleController : MonoBehaviour
     void FixedUpdate()
     {
         var vel = rb2d.linearVelocity;
-        vel.y = speed * GetMovementInput();
+        vel.y = speed * SimplerMovementInput();
         rb2d.linearVelocity = vel;
 
         var pos = transform.position;
@@ -37,9 +41,29 @@ public class PaddleController : MonoBehaviour
 
     }
 
-    protected virtual float GetMovementInput()
+    protected float SimplerMovementInput()
     {
-        return 0f;
+        if (GetMovementInput() > 0) return 1;
+        else if (GetMovementInput() < 0) return -1;
+        else return 0;
+    }
+
+    protected abstract float GetMovementInput();
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Floors"))
+        {
+            inWall = 1;
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Floors"))
+        {
+            inWall = 0;
+        }
     }
 
 }

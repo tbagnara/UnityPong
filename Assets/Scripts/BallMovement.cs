@@ -1,7 +1,10 @@
+using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using Unity.Mathematics;
+using UnityEngine.InputSystem.Utilities;
 
-public class BallMovement : MonoBehaviour
+public class BallMovement : MonoBehaviour, ICollidable
 {
     [SerializeField] private Vector2 velocity = new Vector2(10f,10f);
     private Rigidbody2D rb2d; 
@@ -29,16 +32,45 @@ public class BallMovement : MonoBehaviour
     {
         rb2d = GetComponent<Rigidbody2D>();
 
-        if (collision.gameObject.CompareTag("Floors"))
+        ICollidable collidable = collision.gameObject.GetComponent<ICollidable>();
+        if (collidable != null)
         {
-            rb2d.linearVelocity = new Vector2(rb2d.linearVelocity.x, -rb2d.linearVelocity.y);
-            Debug.Log("Floor");
+            collidable.OnHit(collision);
+            
+        }
+
+        OnHit(collision);
+
+    }
+
+    public void OnHit(Collision2D collision)
+    {
+        /*
+        if (collision.gameObject.CompareTag("Floors")) 
+            {
+                rb2d.linearVelocity = new Vector2(rb2d.linearVelocity.x, -rb2d.linearVelocity.y);
+                Debug.Log("Floor");
+            }
+            else
+            {
+                rb2d.linearVelocity = new Vector2(-rb2d.linearVelocity.x, rb2d.linearVelocity.y);
+                Debug.Log("Wall");
+            }
+        //*/
+
+        Vector2 colNormal = collision.contacts[0].normal;
+
+        
+        if (collision.gameObject.CompareTag("Player")) 
+        {
+            rb2d.linearVelocity = new Vector2(-rb2d.linearVelocity.x, rb2d.linearVelocity.y);
         }
         else
         {
-            rb2d.linearVelocity = new Vector2(-rb2d.linearVelocity.x, rb2d.linearVelocity.y);
-            Debug.Log("Wall");
+            rb2d.linearVelocity = Vector2.Reflect(rb2d.linearVelocity, colNormal);
         }
+
+        
 
     }
 

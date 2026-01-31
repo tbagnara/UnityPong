@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Player2Paddle : PaddleController
+public class Player2Paddle : PaddleController, ICollidable
 {
 
     protected override float GetMovementInput()
@@ -8,4 +8,8 @@ public class Player2Paddle : PaddleController
         return Input.GetAxis("RightPaddle");
     }
 
+    public void OnHit(Collision2D collision)
+    {
+        Debug.Log("Paddle2Hit");
+    }
 }
