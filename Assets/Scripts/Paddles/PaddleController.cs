@@ -1,19 +1,40 @@
+using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.UIElements;
 
-public abstract class PaddleController : MonoBehaviour
+public abstract class PaddleController : NetworkBehaviour
 {
     protected float speed = 5f;
     protected float boundY = 4f;
-
     protected int inWall = 0;
-
     private Rigidbody2D rb2d;
+    private NetworkVariable<float> yPosition = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     
 
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        
+        if (IsOwner) {
+            if (IsHost)
+            {
+                rb2d.transform.position = new Vector2(-8.17f, 0);
+            }
+            else if(IsClient) 
+            {
+                rb2d.transform.position = new Vector2(8.17f, 0);
+            }   
+        }
+        else
+        {
+            if (IsHost)
+            {
+                rb2d.transform.position = new Vector2(8.17f, 0);
+            }
+            else if(IsClient) 
+            {
+                rb2d.transform.position = new Vector2(-8.17f, 0);
+            }
+        }
     }
 
     
@@ -24,21 +45,32 @@ public abstract class PaddleController : MonoBehaviour
 
     void FixedUpdate()
     {
-        var vel = rb2d.linearVelocity;
-        vel.y = speed * SimplerMovementInput();
-        rb2d.linearVelocity = vel;
+        Movement();
+    }
 
-        var pos = transform.position;
-        if (pos.y > boundY)
-        {
-            pos.y = boundY;
-        }
-        else if (pos.y < -boundY)
-        {
-            pos.y = -boundY;
-        }
-        transform.position = pos;
+    protected void Movement()
+    {
+        if (IsOwner) {
+            var vel = rb2d.linearVelocity;
+            vel.y = speed * SimplerMovementInput();
+            rb2d.linearVelocity = vel;
 
+            var pos = transform.position;
+            if (pos.y > boundY)
+            {
+                pos.y = boundY;
+            }
+            else if (pos.y < -boundY)
+            {
+                pos.y = -boundY;
+            }
+            yPosition.Value = pos.y;
+            rb2d.position = pos;
+        }
+        else
+        {
+            rb2d.position = new Vector2(transform.position.x, yPosition.Value);
+        }
     }
 
     protected float SimplerMovementInput()

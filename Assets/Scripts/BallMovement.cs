@@ -3,8 +3,9 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using Unity.Mathematics;
 using UnityEngine.InputSystem.Utilities;
+using Unity.Netcode;
 
-public class BallMovement : MonoBehaviour, ICollidable
+public class BallMovement : NetworkBehaviour, ICollidable
 {
     [SerializeField] private Vector2 velocity = new Vector2(10f,10f);
     private Rigidbody2D rb2d; 

@@ -6,7 +6,15 @@ public class Player1Paddle : PaddleController, ICollidable
     protected SpriteRenderer spriteR;
     protected override float GetMovementInput()
     {
-        return Input.GetAxis("LeftPaddle");
+        if(IsHost) {
+            return Input.GetAxis("LeftPaddle");
+        } else if(IsClient) {
+            return Input.GetAxis("RightPaddle");
+        }
+        else
+        {
+            return 0;
+        }
     }
 
     public void OnHit(Collision2D collision)
